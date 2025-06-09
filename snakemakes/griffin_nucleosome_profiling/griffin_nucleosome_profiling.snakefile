@@ -18,6 +18,22 @@ configfile: "config/sites.yaml"
 configfile: "config/config.yaml" 
 configfile: "config/cluster_slurm.yaml" 
 
+if config["run_type"] == "duet":
+	griffin_scripts_dir = config["griffin_scripts_dir"] + "/5_Griffin_LR_duet"
+elif config["run_type"] == "illumina":
+	griffin_scripts_dir = config["griffin_scripts_dir"] + "/Griffin"
+else:
+	raise ValueError("run_type must be either 'duet' or 'illumina'")
+
+
+# if config["run_type"] == "duet":
+# 	griffin_scripts_dir = config["griffin_scripts_dir"] + "/5_Griffin_LR"
+# elif config["run_type"] == "illumina":
+# 	griffin_scripts_dir = config["griffin_scripts_dir"]
+# else:
+# 	raise ValueError("run_type must be either 'duet' or 'illumina'")
+
+
 rule all:
 	input: #commented out files are produced at the same time as other files
 		expand("{results_dir}/{samples}/{samples}.GC_corrected.coverage.tsv",results_dir=config['results_dir'],samples=config['samples']),
@@ -44,8 +60,8 @@ rule calc_cov:
 		chrom_sizes_path = config['chrom_sizes_path'],
 
 		sites_yaml = config['sites_yaml'],
-		griffin_scripts_dir = config['griffin_scripts_dir'],
-		griffin_coverage_script = config['griffin_scripts_dir']+'/griffin_coverage.py',
+		griffin_scripts_dir = griffin_scripts_dir,
+		griffin_coverage_script = griffin_scripts_dir+'/griffin_coverage.py',
 
 		chrom_column=config['chrom_column'],
 		position_column=config['position_column'],
@@ -109,8 +125,8 @@ rule merge_sites:
 		chrom_sizes_path = config['chrom_sizes_path'],
 
 		sites_yaml = config['sites_yaml'],
-		griffin_scripts_dir = config['griffin_scripts_dir'],
-		griffin_merge_sites_script = config['griffin_scripts_dir']+'/griffin_merge_sites.py',
+		griffin_scripts_dir = griffin_scripts_dir,
+		griffin_merge_sites_script = griffin_scripts_dir+'/griffin_merge_sites.py',
 
 		chrom_column=config['chrom_column'],
 		position_column=config['position_column'],
@@ -197,7 +213,7 @@ rule generate_plots:
 		individual=config['individual'],
 		results_dir=config['results_dir'],
 
-		griffin_plot_script = config['griffin_scripts_dir']+'/griffin_plot.py',
+		griffin_plot_script = griffin_scripts_dir+'/griffin_plot.py',
 
 		tmp_dir = config['tmp_dir'] #for removing empty directories
 

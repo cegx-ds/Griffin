@@ -14,9 +14,13 @@ snakemake -s griffin_GC_and_mappability_correction.snakefile --latency-wait 60 -
 
 """
 
-configfile: "config/samples.yaml"
+
+# configfile: "config/ilm_samples.yaml"
 configfile: "config/config.yaml"
 configfile: "config/cluster_slurm.yaml"
+
+griffin_scripts_dir = config["griffin_scripts_dir"] + "/5_Griffin_LR"
+
 
 if config['mappability_correction']: 
 	rule all:
@@ -63,7 +67,7 @@ rule mappability_bias:
 		map_q=config['map_quality'],
 		CPU = config['mappability_bias']['ncpus'],
 
-		griffin_mappability_script = config['griffin_scripts_dir']+'/griffin_mappability_correction.py'
+		griffin_mappability_script = griffin_scripts_dir+'/griffin_mappability_correction.py'
 
 	shell:
 		"time {params.griffin_mappability_script} \
@@ -92,7 +96,7 @@ rule GC_counts:
 		size_range=config['GC_bias_size_range'],
 		CPU = config['GC_counts']['ncpus'],
 
-		griffin_GC_counts_script = config['griffin_scripts_dir']+'/griffin_GC_counts.py'
+		griffin_GC_counts_script = griffin_scripts_dir+'/griffin_GC_counts.py'
 
 	shell:
 		"time {params.griffin_GC_counts_script} \
@@ -117,7 +121,7 @@ rule GC_bias:
 		mappable_name =  config['mappable_regions'].rsplit('/',1)[1].rsplit('.',1)[0],
 		genome_GC_frequency = config['genome_GC_frequency'],
 		size_range=config['GC_bias_size_range'],
-		griffin_GC_bias_script = config['griffin_scripts_dir']+'/griffin_GC_bias.py'
+		griffin_GC_bias_script = griffin_scripts_dir+'/griffin_GC_bias.py'
 
 	shell:
 		"time {params.griffin_GC_bias_script} \
