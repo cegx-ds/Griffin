@@ -1,5 +1,5 @@
 
-# Running Griffin on duet and illumina data to compare results
+# Running Griffin on duet and illumina data to compare results
 
 ## Set up
 
@@ -50,7 +50,7 @@ for seq in "duet" "ilm"; do
       -j 2 \
       --configfile "../../config_${seq}.yaml" \
       --configfile "../../${seq}_samples.yaml"
-    
+    cp "results/samples.GC.yaml" ../../snakemake/griffin_nucelosome_profiling/
     mv results/* "../../results_${seq}"
     
     cd ../../griffin_nucleosome_profiling
