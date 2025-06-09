@@ -19,6 +19,10 @@ Here we will use data previously used to assess fragmentomics comparability betw
 bash bin/get_data.sh
 ```
 
+You will need to have the reference genome in place to run the pipeline, in the current 
+config files I have specified its location as `/scratch/reference/GRCh38Decoy.fa`, it must 
+also be fai indexed using samtools.
+
 Create sample sheets:
 
 ```bash

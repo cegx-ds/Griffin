@@ -9,7 +9,7 @@
 #config files##
 ###############
 cluster_slurm: config/cluster_slurm.yaml #used to get info about available CPU for the calc_cov step
-sites_yaml: config/sites_list.yaml #used to run calc coverage step on all sites
+sites_yaml: ../../config/sites_list.yaml #used to run calc coverage step on all sites
 samples_yaml: config/samples.GC.yaml #for plotting
 griffin_scripts_dir: ../../scripts
 run_type: duet

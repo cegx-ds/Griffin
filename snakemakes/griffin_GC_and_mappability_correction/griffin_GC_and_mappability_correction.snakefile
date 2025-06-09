@@ -22,6 +22,7 @@ configfile: "config/cluster_slurm.yaml"
 griffin_scripts_dir = config["griffin_scripts_dir"] + "/5_Griffin_LR"
 
 
+
 if config['mappability_correction']: 
 	rule all:
 		input: 
