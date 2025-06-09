@@ -10,7 +10,7 @@ git clone git@github.com:mouliere-lab/ITSFASTR.git
 git clone git@github.com:adoebley/Griffin_analyses.git
 ```
 
-## Data
+## Data
 
 Here we will use data previously used to assess fragmentomics comparability between duet and illumina WGS (DS-417).
 
