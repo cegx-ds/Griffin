@@ -58,7 +58,7 @@ for seq in "duet" "ilm"; do
     cp "results/samples.GC.yaml" ../../snakemake/griffin_nucelosome_profiling/
     mv results/* "../../results_${seq}"
     
-    cd ../../griffin_nucleosome_profiling
+    cd ../griffin_nucleosome_profiling
     
     snakemake \
       -s griffin_nucelosome_profiling.snakefile -j 2 \
