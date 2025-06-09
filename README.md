@@ -31,12 +31,13 @@ mv ilm_samples.yaml snakemakes/griffin_GC_and_mappability_correction/config/
 
 ## Griffin steps
 
-### GC bias correction & Nucleosome profiling
-
 ```bash
 conda env create -n griffin -f envs/griffin.yaml
 conda activate griffin
 ```
+
+Different config files are required to run Griffin in normal mode or long-read mode, which requires 
+using the modified profiling script from ITSFASTR. Long read mode is used for duet in order to use the read length as the fragment length.
 
 
 ```bash
